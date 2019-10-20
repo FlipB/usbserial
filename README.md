@@ -16,7 +16,7 @@ import (
 
 func main() {
 	device := &usbserial.Device{}
-	err = device.Open(ids.vid, ids.pid)
+	err = device.Open(0x12d1, 0x1001)
 	if err == nil {
 		fmt.Printf("unable to open device: %v\n", err)
 		return
@@ -30,6 +30,8 @@ func main() {
 	}
 	// returned port, commandPort is an io.ReadWriteCloser
 	defer commandPort.Close()
+
+	// You can open more interfaces. K3520 has data port (voice call data) on index 1, and notify port (network notices (RING's etc.)).
 
 	// Read some bytes
 	n, err := commandPort.Read([]byte{})
