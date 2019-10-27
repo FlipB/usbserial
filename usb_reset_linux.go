@@ -22,9 +22,8 @@ func reset_usb(vid, pid int) error {
 	// ls /sys/bus/usb/*/idVendor
 	// ls /sys/bus/usb/*/idProduct
 
-	
 	fd, _ := syscall.Open(devPath, syscall.O_RDWR, 0777)
-	var USBDEVFS_RESET := 0 // ioctl.IO('U', 20) // Source of params is https://github.com/torvalds/linux/blob/master/include/uapi/linux/usbdevice_fs.h 
+	var USBDEVFS_RESET = 0 // ioctl.IO('U', 20) // Source of params is https://github.com/torvalds/linux/blob/master/include/uapi/linux/usbdevice_fs.h
 
 	var ptr *int // ioctl output to this - should not be used for this ioctl
 	_, _, err := syscall.Syscall(syscall.SYS_IOCTL, fd, USBDEVFS_RESET, ptr)
