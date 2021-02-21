@@ -73,7 +73,6 @@ func (d *Device) Open(Vid, Pid int) error {
 				port:    desc.Port,
 				address: desc.Address,
 			}
-
 			openedDevicesLock.Lock()
 			defer openedDevicesLock.Unlock()
 			openDevice, foundOpenDevice := openedDevices[d]
